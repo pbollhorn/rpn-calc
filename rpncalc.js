@@ -22,27 +22,30 @@ function parseExpression(expression) {
 function goThroughQueue() {
   while (inputQueue.length > 0) {
     // dequeue element fra køen
+    const element = inputQueue.pop();
+    console.log(element);
 
     // hvis det er et number:
     //      push det til resultstack
+    if (!isNaN(element)) {
+      resultStack.push(element);
+    }
     // ellers er det en operation
     //      så kald performOperation med den
+    else {
+      performOperation(element);
+    }
   }
 }
 
 // udfører en bestemt operation
 function performOperation(operation) {
-
-    // pop de sidste to værdier fra resultStack til A og B
-
-    // hvis operation == "+"
-    //      læg A og B sammen, push resultatet til resultStack
-    // hvis operation == "*"
-    //    gang A og B, push resultat til resultStack
-    // osv...
-
-
-
+  // pop de sidste to værdier fra resultStack til A og B
+  // hvis operation == "+"
+  //      læg A og B sammen, push resultatet til resultStack
+  // hvis operation == "*"
+  //    gang A og B, push resultat til resultStack
+  // osv...
 }
 
 function rpncalc(expression) {
