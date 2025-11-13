@@ -1,4 +1,4 @@
-const expression = "2 3 4 x +";
+const expression = "2 3 4 * +";
 
 const inputQueue = [];
 
@@ -23,16 +23,14 @@ function goThroughQueue() {
   while (inputQueue.length > 0) {
     // dequeue element fra køen
     const element = inputQueue.pop();
-    console.log(element);
 
     // hvis det er et number:
     //      push det til resultstack
-    if (!isNaN(element)) {
-      resultStack.push(element);
-    }
     // ellers er det en operation
     //      så kald performOperation med den
-    else {
+    if (!isNaN(element)) {
+      resultStack.push(element);
+    } else {
       performOperation(element);
     }
   }
@@ -46,11 +44,23 @@ function performOperation(operation) {
   // hvis operation == "*"
   //    gang A og B, push resultat til resultStack
   // osv...
+
+  const B = resultStack.pop();
+  const A = resultStack.pop();
+  switch (operation) {
+    case "+":
+      resultStack.push(A + B);
+      break;
+    case "*":
+      resultStack.push(A * B);
+      break;
+  }
 }
 
 function rpncalc(expression) {
   parseExpression(expression);
   goThroughQueue();
+  console.log(resultStack.pop());
 }
 
 rpncalc(expression);
