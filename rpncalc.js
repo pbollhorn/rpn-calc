@@ -15,14 +15,17 @@ function parseExpression(expression) {
       inputQueue.push(Number(val));
     }
   }
-  console.log(splitted);
 }
 
 // går gennem køen og finder tal og operationer
 function goThroughQueue() {
   while (inputQueue.length > 0) {
+    console.log(inputQueue);
+    console.log(resultStack);
+
     // dequeue element fra køen
     const element = inputQueue.pop();
+    console.log("popped element: " + element);
 
     // hvis det er et number:
     //      push det til resultstack
