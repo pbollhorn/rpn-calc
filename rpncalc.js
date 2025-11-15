@@ -1,14 +1,20 @@
 import Queue from "https://pbollhorn.github.io/datastruktur-portfolio/queue/queue.js";
 import Stack from "https://pbollhorn.github.io/datastruktur-portfolio/stack/stack.js";
 
+console.log("hello");
+
 const expression = "2 3 4 * +";
 
 const inputQueue = new Queue();
 
 const resultStack = new Stack();
 
+inputQueue.printQueue();
+resultStack.printStack();
+
 //parseExpression læser en expression og putter den i inputQueue
 function parseExpression(expression) {
+  console.log("hello from parseExpression the expression is: " + expression);
   const splitted = expression.split(" ");
   for (const val of splitted) {
     if (isNaN(val)) {
@@ -22,7 +28,7 @@ function parseExpression(expression) {
 
 // går gennem køen og finder tal og operationer
 function goThroughQueue() {
-  while (inputQueue.length > 0) {
+  while (inputQueue.size() > 0) {
     console.log(inputQueue);
     console.log(resultStack);
 
@@ -65,7 +71,9 @@ function performOperation(operation) {
 }
 
 function rpncalc(expression) {
+  console.log(expression);
   parseExpression(expression);
+  console.log("hello again");
   goThroughQueue();
   console.log(resultStack.pop());
 }
