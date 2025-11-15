@@ -1,8 +1,11 @@
+import Queue from "https://pbollhorn.github.io/datastruktur-portfolio/queue/queue.js";
+import Stack from "https://pbollhorn.github.io/datastruktur-portfolio/stack/stack.js";
+
 const expression = "2 3 4 * +";
 
-const inputQueue = [];
+const inputQueue = new Queue();
 
-const resultStack = [];
+const resultStack = new Stack();
 
 //parseExpression læser en expression og putter den i inputQueue
 function parseExpression(expression) {
@@ -10,9 +13,9 @@ function parseExpression(expression) {
   for (const val of splitted) {
     if (isNaN(val)) {
       // val er en operation
-      inputQueue.push(val);
+      inputQueue.enqueue(val);
     } else {
-      inputQueue.push(Number(val));
+      inputQueue.enqueue(Number(val));
     }
   }
 }
@@ -24,15 +27,16 @@ function goThroughQueue() {
     console.log(resultStack);
 
     // dequeue element fra køen
-    const element = inputQueue.pop();
-    console.log("popped element: " + element);
+    const element = inputQueue.dequeue();
+    console.log("dequeued element: " + element);
 
     // hvis det er et number:
     //      push det til resultstack
     // ellers er det en operation
     //      så kald performOperation med den
-    if (!isNaN(element)) {
+    if (typeof element === "number") {
       resultStack.push(element);
+      console.log("push this element to resultStack: " + element);
     } else {
       performOperation(element);
     }
