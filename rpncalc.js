@@ -1,8 +1,6 @@
 import Queue from "https://pbollhorn.github.io/datastruktur-portfolio/queue/queue.js";
 import Stack from "https://pbollhorn.github.io/datastruktur-portfolio/stack/stack.js";
 
-const expression = "5 9 + 4 /";
-
 const inputQueue = new Queue();
 
 const resultStack = new Stack();
@@ -71,5 +69,6 @@ function rpncalc(expression) {
   return resultStack.pop();
 }
 
+const expression = "5 9 + 4 /";
 const result = rpncalc(expression);
 console.log(result);
