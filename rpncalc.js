@@ -1,20 +1,14 @@
 import Queue from "https://pbollhorn.github.io/datastruktur-portfolio/queue/queue.js";
 import Stack from "https://pbollhorn.github.io/datastruktur-portfolio/stack/stack.js";
 
-console.log("hello");
-
-const expression = "2 3 4 * +";
+const expression = "5 9 + 4 /";
 
 const inputQueue = new Queue();
 
 const resultStack = new Stack();
 
-inputQueue.printQueue();
-resultStack.printStack();
-
 //parseExpression læser en expression og putter den i inputQueue
 function parseExpression(expression) {
-  console.log("hello from parseExpression the expression is: " + expression);
   const splitted = expression.split(" ");
   for (const val of splitted) {
     if (isNaN(val)) {
@@ -29,12 +23,8 @@ function parseExpression(expression) {
 // går gennem køen og finder tal og operationer
 function goThroughQueue() {
   while (inputQueue.size() > 0) {
-    console.log(inputQueue);
-    console.log(resultStack);
-
     // dequeue element fra køen
     const element = inputQueue.dequeue();
-    console.log("dequeued element: " + element);
 
     // hvis det er et number:
     //      push det til resultstack
@@ -42,7 +32,6 @@ function goThroughQueue() {
     //      så kald performOperation med den
     if (typeof element === "number") {
       resultStack.push(element);
-      console.log("push this element to resultStack: " + element);
     } else {
       performOperation(element);
     }
@@ -64,18 +53,23 @@ function performOperation(operation) {
     case "+":
       resultStack.push(A + B);
       break;
+    case "-":
+      resultStack.push(A - B);
+      break;
     case "*":
       resultStack.push(A * B);
+      break;
+    case "/":
+      resultStack.push(A / B);
       break;
   }
 }
 
 function rpncalc(expression) {
-  console.log(expression);
   parseExpression(expression);
-  console.log("hello again");
   goThroughQueue();
-  console.log(resultStack.pop());
+  return resultStack.pop();
 }
 
-rpncalc(expression);
+const result = rpncalc(expression);
+console.log(result);
